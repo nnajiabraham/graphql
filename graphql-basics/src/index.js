@@ -1,49 +1,71 @@
 import {
     GraphQLServer
 } from 'graphql-yoga'
-import {
-    Agent
-} from 'http';
 
-//type definition/Schema
+// Scalar types - String, Boolean, Int, Float, ID
+
+// Type definitions (schema)
 const typeDefs = `
     type Query {
+        name: String!
+        age: Int
+        gpa: Float!
+        employed: Boolean!
+        me: User!
+        post: Post!
+    }
+
+    type User {
         id: ID!
         name: String!
-        age: Int!
-        employed: Boolean!
-        gpa: Float
+        email: String!
+        age: Int
+    }
+
+    type Post {
+        id: ID!
+        title: String!
+        body: String!
+        published: Boolean!
     }
 `
 
-//resolvers
+// Resolvers
 const resolvers = {
     Query: {
-        id() {
-            return 'abc124'
+        me() {
+            return {
+                id: '123098',
+                name: 'Abraham',
+                email: 'mike@example.com'
+            }
+        },
+        post() {
+            return {
+                id: '092',
+                title: 'GraphQL 101',
+                body: '',
+                published: false
+            }
         },
         name() {
             return 'Abraham'
         },
-        age() {
-            return 25
+        gpa() {
+            return 3.75
         },
         employed() {
             return true
-        },
-        gpa() {
-            return null
         }
 
     }
 }
 
 const server = new GraphQLServer({
-    typeDefs, // or typeDefs: typeDefs value
-    resolvers // or resolvers: resolvers value
+    typeDefs,
+    resolvers
 })
 
 server.start(() => {
-    console.log("server on run");
-
+    console.log('The server is up!')
 })
