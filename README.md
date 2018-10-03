@@ -1,1 +1,1 @@
-# Graphql Projects
+# GraphQL Projects
