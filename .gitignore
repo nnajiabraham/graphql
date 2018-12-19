@@ -1,2 +1,8 @@
 .vscode
 graphql-basics/node_modules
+
+graphql-prisma/node_modules
+graphql-prisma/config/
+graphql-prisma/dist/
+
+apollo-client/dist/
